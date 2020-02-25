@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>To Do List </title>
+    <title>To Do List</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +12,9 @@
     <link href="//fonts.googleapis.com/css?family=Lato">
     <link href="//fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link href="//fonts.googleapis.com/css?family=Muli">
+    <script type="text/javascript">
+    
+    </script>
 </head>
 
 <body id="page-top" class="primary-night">
@@ -28,16 +31,23 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <div class="col-sm-12 center">
+            <div id="login-button" class="col-sm-12 center">
                 <center>
-                    <span class="border-icon primary-color" style="width: 95%;" data-toggle="tooltip" title="Click to open Link" onclick="openLink('https://drive.google.com/open?id=1eMKs8Zvo37_aIguzM-IKnR8avf49znqy')" class="">LOGIN</span>
+                    <a class="border-icon primary-color" style="width: 95%;" data-toggle="modal" data-target="#login">LOGIN</a>
                 </center>
             </div>
-            <div class="col-sm-12 center">
+            <div id="signin-button" class="col-sm-12 center">
                 <br>
                 <br>
                 <center>
-                    <span class="border-icon resume-color" style="width: 95%;" data-toggle="tooltip" title="Click to open Link" onclick="openLink('https://drive.google.com/open?id=1eMKs8Zvo37_aIguzM-IKnR8avf49znqy')" class="">SIGN UP</span>
+                    <a class="border-icon resume-color" style="width: 95%;" data-toggle="modal" data-target="#signup">SIGN UP</a>
+                </center>
+            </div>
+            <div id="logout-button" class="col-sm-12 center">
+                <br>
+                <br>
+                <center>
+                    <a class="border-icon resume-color" style="width: 95%;" onclick="logout()">LOGOUT</a>
                 </center>
             </div>
         </center>
@@ -52,14 +62,14 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div id="task-area" class="col-md-12">
                     <div class=" primary-black col-md-6">
                         <div class="open-description highlight-box">
                             <h4>Add new task</h4>
                             <br>
                             <br>
                             <div class="col-sm-4">
-                                <label for="new_title" class="control-label minotaur-label">Ttile :</label>
+                                <label for="new_title">Ttile :</label>
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
@@ -67,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="new_description" class="control-label minotaur-label">Description :</label>
+                                <label for="new_description">Description :</label>
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
@@ -81,226 +91,121 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class=" primary-black col-md-6">
-                        <div class="open-description highlight-box">
-                            <p class="layer-100">
-                                <div class="col-md-11">
-                                    <h4>Edit task</h4>
-                                    <br>
-                                    <br>
-                                    <div class="col-sm-4">
-                                        <label for="normal_value" class="control-label minotaur-label">Ttile :</label>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="normal_value" id="normal_value" ng-maxlength="1000" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="normal_value" class="control-label minotaur-label">Description :</label>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="normal_value" id="normal_value" ng-maxlength="1000" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-11">
-                                    <b>Title :</b> I love to work on Data it always made me wonder what we can't do with it. Some database technologies i have worked on are <b>MySQL, MongoDB</b>. Database Development made me push my limit to think ways to develop collection
-                                    <br>
-                                    <br>
-                                    <b>Description :</b> I love to work on Data it always made me wonder what we can't do with it. Some database technologies i have worked on are <b>MySQL, MongoDB</b>. Database Development made me push my limit to think ways to develop collections, structure and relations so that they are optimum as well as future-ready. Working on Database always allowed to extend limits of my thinking ability and find creative solutions.
-                                </div>
-                            </p>
-                            <div class="tool-box">
-                                <div class="fluid-container">
-                                    <center>
-                                        <div data-toggle="tooltip" title="Delete" data-toggle="tooltip" title="Click to delete task" class="border-icon red-color">
-                                            <i class="fa fa-trash"></i>
-                                        </div>
-                                        <div class="border-icon red-color"></div>
-                                        <div data-toggle="tooltip" title="Edit" data-toggle="tooltip" title="Click to edit task" class="border-icon primary-color">
-                                            <i class="fa fa-pencil"></i>
-                                        </div>
-                                        <div class="border-icon red-color"></div>
-                                        <div data-toggle="tooltip" title="Delete" data-toggle="tooltip" title="Click to delete task" class="border-icon resume-color">
-                                            <i class="fa fa-check-square-o"></i>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
     </div>
+    <!-- SIGN UP MOADAL BOX -->
+    <div id="signup" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header background-green">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sign Up</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="javascript:void(0);" method="post">
+                        <div class="col-md-12">
+                            <div class="col-sm-4">
+                                <label for="name">Name :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <input type="text" name="name" id="name" required>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-4">
+                                <label for="email">E-Mail Address :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-4">
+                                <label for="password">Password :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" required>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12">
+                                <center>
+                                    <div class="form-group">
+                                        <input class="border-icon resume-color" style="width: 100%; border: 2px solid; text-align: center;background: none; padding-bottom: 30px;" data-toggle="tooltip" title="signup" value="Submit" onclick="signup()" type="submit">
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default background-green" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SIGN UP MOADAL BOX -->
+    <div id="login" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header background-blue">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="javascript:void(0);" method="post">
+                        <div class="col-md-12">
+                            <div class="col-sm-4">
+                                <label for="login_email">E-Mail Address/ Username :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <input type="login_email" name="login_email" id="login_email" required>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-4">
+                                <label for="login_password">Password :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <input type="login_password" name="login_password" id="login_password" required>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12">
+                                <center>
+                                    <div class="form-group">
+                                        <input class="border-icon primary-color" style="width: 100%; border: 2px solid; text-align: center;background: none; padding-bottom: 30px;" data-toggle="tooltip" title="signup" value="Submit" onclick="login()" type="submit">
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default background-blue" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TASK TEMPLATE -->
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="js/script.js"></script>
-    <script type="text/javascript">
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-        
-        var csrftoken = getCookie('csrftoken');
-        var base_url = "http://127.0.0.1:8000";
-
-        function add_task() {
-            var new_title = document.getElementById('new_title').value;
-            var new_description = document.getElementById('new_description').value;
-            console.log(new_title, new_description)
-            if(new_title != undefined && new_title != null && new_description != undefined && new_description != null) {
-                $.ajax({
-                    url: base_url+"/add_task/",
-                    type: "post",    
-                    header: {
-                        X-CSRFToken: csrftoken,
-                        Content-Type: "application/x-www-form-urlencoded",
-                        Access-Control-Allow-Origin: "http://127.0.0.1/",
-                    },
-                    data: {'title': new_title, 'description': new_description},
-                }).success(function(status, res) {
-                    Swal.fire({
-                      position: 'top-end',
-                      icon: 'success',
-                      title: 'Added Task Successfully',
-                      showConfirmButton: false,
-                      timer: 1500
-                    })
-                    location.reload();
-                });
-            }
-            else {
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'error',
-                  title: 'Error in values entered',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-            }
-        }
-
-        function update_task(id) {
-            var new_title = document.getElementById('new_title'+id).value;
-            var new_description = document.getElementById('new_description'+id).value;
-
-            if(id != undefined && id != null && new_title != undefined && new_title != null && new_description != undefined && new_description != null) {
-                $.ajax({
-                    url: base_url+"/update_task/",
-                    type: "put",    
-                    headers: {
-                        "X-CSRFToken": csrftoken,
-                        "Access-Control-Allow-Headers": *
-                        "Access-Control-Allow-Origin": "127.0.0.1"
-                    },
-                    data: {'id': id, 'title': new_title, 'description': new_description, 'action': "UPDATE"},
-                    dataType: 'json'
-                }).success(function(status, res) {
-                    Swal.fire({
-                      position: 'top-end',
-                      icon: 'success',
-                      title: 'Added Edit Successfully',
-                      showConfirmButton: false,
-                      timer: 1500
-                    })
-                    location.reload();
-                });
-            }
-            else {
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'error',
-                  title: 'Error in values entered',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-            }
-        }
-
-        function delete_task(id) {
-            if(id != undefined && id != null) {
-                $.ajax({
-                    url: base_url+"/delete_task/",
-                    type: "delete",    
-                    headers: {
-                        "X-CSRFToken": csrftoken,
-                        "Access-Control-Allow-Origin": "127.0.0.1"
-                    },
-                    data: {'id': id},
-                    dataType: 'json'
-                }).success(function(status, res) {
-                    Swal.fire({
-                      position: 'top-end',
-                      icon: 'success',
-                      title: 'Delete Task Successfully',
-                      showConfirmButton: false,
-                      timer: 1500
-                    })
-                    location.reload();
-                });
-            }
-            else {
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'error',
-                  title: 'Error in Deleting Task',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-            }
-        }
-
-        function check_task(id) {
-
-            if(id != undefined && id != null) {
-                $.ajax({
-                    url: base_url+"/update_task/",
-                    type: "delete",    
-                    headers: {
-                        "X-CSRFToken": csrftoken,
-                        "Access-Control-Allow-Origin": "127.0.0.1"
-                    },
-                    data: {'id': id, 'action': "CHECK"},
-                    dataType: 'json'
-                }).success(function(status, res) {
-                    Swal.fire({
-                      position: 'top-end',
-                      icon: 'success',
-                      title: 'Checked Task Successfully',
-                      showConfirmButton: false,
-                      timer: 1500
-                    })
-                    location.reload();
-                });
-            }
-            else {
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'error',
-                  title: 'Error in checking task',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-            }
-        }
-    </script>
+    <script src="js/form.js"></script>
 </body>
 
 </html>

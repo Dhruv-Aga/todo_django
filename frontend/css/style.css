@@ -51,9 +51,7 @@ body {
 hr {
     width: 50%;
 }
-button{
-    background: #FFF;
-}
+
 .navbar-default,
 .navbar-default .navbar-#content-container.navbar-brand,
 h1,
@@ -283,17 +281,15 @@ a:active {
 
 .tool-box {
     position: absolute;
-    top: 14px;
+    bottom: 4px;
     right: 16px;
     width: 32px;
-    height: 80%;
-    margin-top: 20px;
     margin-right: 45px;
     font-weight: 500;
     background-color: #FFF;
     word-break: break-all;
     border-radius: 4px;
-    border-left: 1px solid #255555;
+    border: 1px solid #255555;
 }
 
 .general {
@@ -362,6 +358,10 @@ a:active {
         display: block;
         position: relative;
     }
+}
+
+.edit-box{
+    display: none;
 }
 
 .border-btn,
