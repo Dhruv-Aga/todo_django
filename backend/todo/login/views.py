@@ -16,7 +16,7 @@ def check_login(request):
         data = { 'msg' : "Already Logined" }
         status = 200
     else:        
-        data = { 'msg' : "Bad Request" }
+        data = { 'msg' : "Login to see tasks" }
         status = 202
 
     return JsonResponse(data=data, status=status)
@@ -34,12 +34,11 @@ def signup(request):
         if create_user:
             auth_login(request, user)
             return HttpResponse("You are Successfully Signed Up")
-            # return HttpResponseRedirect(reverse('index'))
             data = { 'msg' : "User Added Successfully", 'user': user.session}
             status = 200
         else:
             data = { 'msg' : "User Not Added. Try Again" }
-            status = 202   
+            status = 202
 
     elif request.method == 'GET':
         form_data = request.GET
@@ -69,10 +68,10 @@ def login(request):
         user = authenticate(username=user, password=password)
         if user is not None:
             auth_login(request, user)
-            data = { 'msg' : "User Added Successfully" }
+            data = { 'msg' : "User logined Successfully" }
             status = 200
         else:
-            data = { 'msg' : "User Not Added. Try Again" }
+            data = { 'msg' : "Error in login. Try Again" }
             status = 202
 
     else:        
@@ -90,7 +89,7 @@ def logout(request):
         status = 200
 
     else:        
-        data = { 'msg' : "Bad Request" }
+        data = { 'msg' : "Error in Logout" }
         status = 403
 
     return JsonResponse(data=data, status=status)
@@ -100,7 +99,7 @@ def get_task(request):
     status = 500
     if request.method == 'GET' and request.user.is_authenticated:
         added_by = request.user
-        all_task = list(Task.objects.filter(added_by=added_by, status=0).values())
+        all_task = list(Task.objects.filter(added_by=added_by, status=0).order_by("-id").values()[:10])
         if all_task:
             data = { 'msg' : "Task Refreshed Successfully", 'data': all_task }
             status = 200
@@ -122,14 +121,20 @@ def add_task(request):
         form_data = request.POST
         title = form_data['title']
         description = form_data['description']
-        create_task = Task.objects.create(added_by=added_by, title=title, description=description)
-        if create_task:
-            data = { 'msg' : "Task Added Successfully" }
-            status = 200
-        else:
-            data = { 'msg' : "Task Not Added. Try Again" }
-            status = 202    
 
+        task_count = Task.objects.filter(added_by=added_by, status=0).count()
+
+        if task_count < 10:
+        	create_task = Task.objects.create(added_by=added_by, title=title, description=description)
+	        if create_task:
+	            data = { 'msg' : "Task Added Successfully" }
+	            status = 200
+	        else:
+	            data = { 'msg' : "Task Not Added. Try Again" }
+	            status = 202
+        else:
+        	data = { 'msg' : "Task Limit Reached" }
+        	status = 202       
     else:        
         data = { 'msg' : "Bad Request" }
         status = 403
@@ -175,6 +180,7 @@ def update_task(request):
             else:
                 data = { 'msg' : "Task Not Updated. Try Again" }
                 status = 202
+
         elif action == "CHECK":
             added_by = request.user
             task_id = form_data.get('id')
